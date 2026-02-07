@@ -1,0 +1,48 @@
+name: Cron - Process Refunds
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Every 5 minutes
+  workflow_dispatch:
+
+concurrency:
+  group: refund-process
+  cancel-in-progress: false
+
+jobs:
+  process-refunds:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd scripts/cron
+          npm ci
+
+      - name: Process pending refunds
+        run: |
+          cd scripts/cron
+          npx tsx process-refunds.ts
+        env:
+          RPC_URL: ${{ secrets.RPC_URL }}
+          PROGRAM_ID: ${{ secrets.PROGRAM_ID }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          OPERATOR_KEY: ${{ secrets.OPERATOR_KEY }}
+
+      - name: Notify on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "⚠️ Refund processing cron failed"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

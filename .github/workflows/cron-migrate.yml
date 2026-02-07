@@ -1,0 +1,47 @@
+name: Cron - Migrate Tokens
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # Every 10 minutes
+  workflow_dispatch:
+
+concurrency:
+  group: token-migrate
+  cancel-in-progress: false
+
+jobs:
+  migrate-tokens:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd scripts/cron
+          npm ci
+
+      - name: Process token claims
+        run: |
+          cd scripts/cron
+          npx tsx migrate-tokens.ts
+        env:
+          RPC_URL: ${{ secrets.RPC_URL }}
+          PROGRAM_ID: ${{ secrets.PROGRAM_ID }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Notify on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "⚠️ Token migration cron failed"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

@@ -1,0 +1,56 @@
+name: Update SOL Price
+
+on:
+  schedule:
+    - cron: '* * * * *'  # Every 1 minute
+  workflow_dispatch:  # Allow manual trigger
+
+concurrency:
+  group: sol-price-update
+  cancel-in-progress: false
+
+jobs:
+  update-price:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd scripts/cron
+          npm ci
+
+      - name: Fetch SOL price from Pyth
+        id: fetch-price
+        run: |
+          cd scripts/cron
+          npx tsx update-sol-price.ts
+        env:
+          RPC_URL: ${{ secrets.RPC_URL }}
+          PROGRAM_ID: ${{ secrets.PROGRAM_ID }}
+          AUTHORITY_KEY: ${{ secrets.AUTHORITY_KEY }}
+
+      - name: Update fallback price file
+        if: success()
+        run: |
+          cd scripts/cron
+          npx tsx update-fallback.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Notify on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "⚠️ SOL price update failed"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
