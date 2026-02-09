@@ -60,7 +60,8 @@ export function SlippageSelector({ value, onChange }: SlippageSelectorProps) {
     }
   };
 
-  const displayValue = isCustom ? customValue : value.toString();
+  // Use customValue or current value for display
+  const _displayValue = isCustom ? customValue : value.toString();
 
   return (
     <div className="flex items-center justify-between">

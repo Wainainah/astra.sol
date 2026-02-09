@@ -12,6 +12,7 @@ import { PublicKey, Transaction } from "@solana/web3.js";
 
 import { sellReturn, getSellQuote, getPositionValue } from "@/lib/curve";
 import type { SellQuote, Position } from "@/lib/api-types";
+import { BN } from "@coral-xyz/anchor";
 
 export interface UseSellOptions {
   programId?: string;
@@ -254,6 +255,6 @@ async function createSellInstruction(
       { pubkey: seller, isSigner: true, isWritable: true },
     ],
     programId: new PublicKey(programId),
-    data: Buffer.from([1, ...new BN(shares).toArray("le", 8)]),
+    data: Buffer.from([1, ...new (BN as any)(shares).toArray("le", 8)]),
   };
 }

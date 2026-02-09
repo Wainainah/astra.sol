@@ -445,8 +445,8 @@ async function handleCreate(event: HeliusWebhookPayload) {
 
 function extractTransactionData(event: HeliusWebhookPayload) {
   // This is a simplified extraction - adjust based on your actual program account structure
-  const accountData = event.accountData ?? [];
-  const nativeTransfers = event.nativeTransfers ?? [];
+  const _accountData = event.accountData ?? [];
+  const _nativeTransfers = event.nativeTransfers ?? [];
   
   // Find launch address (usually a PDA)
   const launchAddress = event.events?.find(e => e.data?.launchAddress)?.data?.launchAddress as string | undefined;

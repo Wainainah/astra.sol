@@ -18,7 +18,7 @@ interface RouteParams {
 
 export const dynamic = "force-dynamic";
 
-export async function GET(request: Request, { params }: RouteParams) {
+export async function GET(_request: Request, { params }: RouteParams) {
   try {
     const { address } = params;
 

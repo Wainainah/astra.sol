@@ -3,7 +3,7 @@
  * Provides programmatic control over swap execution
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { VersionedTransaction } from '@solana/web3.js';
 import { toast } from 'sonner';

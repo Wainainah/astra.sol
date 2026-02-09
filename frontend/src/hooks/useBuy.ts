@@ -8,7 +8,7 @@
 import { useState, useCallback } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { BN } from "@coral-xyz/anchor";
+
 import { buyReturn, getBuyQuote } from "@/lib/curve";
 import type { CurveQuote } from "@/lib/api-types";
 

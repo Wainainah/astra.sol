@@ -43,7 +43,7 @@ export function useUnifiedTrade({
   // 4. Claim hook (for bundling)
   const { claim } = useClaim({ launchAddress, tokenMint });
 
-  // Unified buy function
+  // Unified buy function - memoized to prevent recreating on every render
   const buy = useMemo(() => {
     if (isGraduated && tokenMint) {
       return jupiter.buy;

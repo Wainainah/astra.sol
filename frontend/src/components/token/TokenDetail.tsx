@@ -12,7 +12,7 @@ import Image from "next/image";
 import { useAnchorProgram } from "@/hooks/useAnchorProgram";
 import { fetchMetadata, getImageFromMetadata } from "@/lib/metadata";
 import { PublicKey } from "@solana/web3.js";
-import { BN } from "@coral-xyz/anchor";
+import type { BN } from "@coral-xyz/anchor";
 import { TradePanel } from "@/components/trade/TradePanel";
 import { parseSolanaError } from "@/lib/solana-errors";
 import type { TokenStatus } from "@/components/token/TokenCard";
