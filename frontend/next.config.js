@@ -29,6 +29,9 @@ const nextConfig = {
       "imgur.com",
       "*.googleusercontent.com",
       "*.amazonaws.com",
+      // Cloudflare R2
+      "pub-36f168fc53694c08b0b1211783da5f3d.r2.dev",
+      "*.r2.dev",
       // NFT metadata
       "nftstorage.link",
       "dweb.link",
