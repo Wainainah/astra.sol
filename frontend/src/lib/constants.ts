@@ -34,6 +34,8 @@ export const CURVE_SCALE = 1_000_000_000_000;
 // Time Windows
 export const VESTING_DURATION_SECONDS = 42 * 24 * 60 * 60; // 42 days
 export const LAUNCH_DURATION_SECONDS = 7 * 24 * 60 * 60; // 7 days
+export const VESTING_DAYS = 42;
+export const VESTING_RATE_BPS = 238; // ~2.38% per day (10000 / 42)
 
 // Basis Points
 export const BPS_DENOMINATOR = 10_000;

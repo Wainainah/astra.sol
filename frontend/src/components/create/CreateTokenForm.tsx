@@ -42,9 +42,7 @@ type Step = "form" | "seed";
 
 const DRAFT_STORAGE_KEY = "astra_token_draft";
 
-const FACTORY_ADDRESS = process.env.NEXT_PUBLIC_FACTORY_ADDRESS as
-  | string
-  | undefined;
+
 
 export function CreateTokenForm() {
   const [step, setStep] = useState<Step>("form");
@@ -75,8 +73,8 @@ export function CreateTokenForm() {
           image: null,
         };
       }
-    } catch (e) {
-      console.warn("Failed to load draft:", e);
+    } catch (_e) {
+      console.warn("Failed to load draft:", _e);
     }
     return null;
   }, []);
@@ -133,8 +131,8 @@ export function CreateTokenForm() {
             savedAt: new Date().toISOString(),
           }),
         );
-      } catch (e) {
-        console.warn("Failed to save draft:", e);
+      } catch (_e) {
+        console.warn("Failed to save draft:", _e);
       }
     }, 1000); // Debounce 1 second
 

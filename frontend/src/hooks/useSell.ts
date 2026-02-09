@@ -9,7 +9,7 @@
 import { useState, useCallback } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey, Transaction } from "@solana/web3.js";
-import { BN } from "@coral-xyz/anchor";
+
 import { sellReturn, getSellQuote, getPositionValue } from "@/lib/curve";
 import type { SellQuote, Position } from "@/lib/api-types";
 
@@ -123,36 +123,6 @@ export function useSell(options: UseSellOptions = {}): UseSellResult {
 
       setQuote(apiQuote);
       return apiQuote;
-    },
-    []
-  );
-
-  /**
-   * Calculate what user is leaving behind by selling
-   */
-  const calculateLeavingBehind = useCallback(
-    (
-      sharesToSell: number,
-      position: Position,
-      currentTotalShares: number
-    ): { sol: number; usd: number } => {
-      // Current position value (what it would cost to buy now)
-      const currentValue = getPositionValue(position.shares, currentTotalShares);
-      
-      // What user gets back (proportional to basis)
-      const refund = sellReturn(
-        sharesToSell,
-        position.shares,
-        position.solBasis
-      );
-
-      // What they're leaving on the table
-      const leavingBehind = Math.max(0, currentValue - refund);
-
-      return {
-        sol: leavingBehind / 1e9,
-        usd: 0, // Would need solPriceUsd to calculate
-      };
     },
     []
   );

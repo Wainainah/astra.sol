@@ -22,7 +22,6 @@ import {
 } from "@/lib/api-types";
 import { 
   getSolPriceUsd, 
-  calculateMarketCapUsd, 
   calculateGraduationProgress 
 } from "@/lib/price-cache";
 import { GRADUATION_MARKET_CAP_USD } from "@/lib/constants";

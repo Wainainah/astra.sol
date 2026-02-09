@@ -8,7 +8,7 @@
 import { useState, useCallback } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { Program, AnchorProvider, BN } from "@coral-xyz/anchor";
+import { BN } from "@coral-xyz/anchor";
 import { buyReturn, getBuyQuote } from "@/lib/curve";
 import type { CurveQuote } from "@/lib/api-types";
 
@@ -129,12 +129,8 @@ export function useBuy(options: UseBuyOptions = {}): UseBuyResult {
         const transaction = new Transaction();
 
         // Add compute budget for complex curve calculations
-        transaction.add(
-          new Transaction().add(
-            // ComputeBudgetProgram.setComputeUnitLimit({ units: 200_000 })
-            // This would be added in production
-          )
-        );
+        // ComputeBudgetProgram.setComputeUnitLimit({ units: 200_000 })
+        // This would be added in production
 
         // Create buy instruction
         // This is a placeholder - actual implementation would use the IDL

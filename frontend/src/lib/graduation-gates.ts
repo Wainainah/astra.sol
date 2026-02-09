@@ -9,6 +9,7 @@ import {
   GRADUATION_MARKET_CAP_USD,
   GRADUATION_MIN_HOLDERS,
   GRADUATION_MAX_CONCENTRATION_BPS,
+  BPS_DENOMINATOR,
 } from "./constants";
 import type { GraduationGates, Position, Launch } from "./api-types";
 
@@ -107,5 +108,4 @@ export function getGraduationStatus(gates: GraduationGates): {
 }
 
 // Re-export for convenience
-import { BPS_DENOMINATOR } from "./constants";
-export { BPS_DENOMINATOR };
+export { BPS_DENOMINATOR } from "./constants";

@@ -16,7 +16,7 @@ import {
   estimateTokensAtGraduation,
   estimateTokenValueAtGraduation,
 } from "@/lib/curve";
-import { GRADUATION_MARKET_CAP_USD, TOKENS_FOR_HOLDERS } from "@/lib/constants";
+import { GRADUATION_MARKET_CAP_USD } from "@/lib/constants";
 import type { Position, Launch, PositionValue } from "@/lib/api-types";
 
 export interface UsePositionValueOptions {

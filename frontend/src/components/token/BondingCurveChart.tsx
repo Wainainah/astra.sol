@@ -36,7 +36,7 @@ export function BondingCurveChart({ tokenAddress }: BondingCurveChartProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   // V7: Use market cap in USD instead of locked SOL
-  const { price: solPrice, toUsd } = useSolPrice();
+  useSolPrice(); // Hook called for potential future use
   const [currentMarketCapUsd, setCurrentMarketCapUsd] = useState<number>(0);
   const [priceChange24h, setPriceChange24h] = useState<number>(0);
 
