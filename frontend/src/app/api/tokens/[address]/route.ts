@@ -48,7 +48,7 @@ export async function GET(
     }
     
     // Get SOL price for USD calculations
-    const solPriceUsd = await getSolPriceUsd();
+    const _solPriceUsd = await getSolPriceUsd();
     
     // Fetch token
     const launchResult = await db

@@ -44,7 +44,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const offset = parseInt(searchParams.get("offset") ?? "0", 10);
     
     // Get SOL price for USD calculations
-    const solPriceUsd = await getSolPriceUsd();
+    const _solPriceUsd = await getSolPriceUsd();
     
     // Build WHERE conditions
     const conditions = [];
