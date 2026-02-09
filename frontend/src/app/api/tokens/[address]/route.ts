@@ -20,7 +20,6 @@ import {
 } from "@/lib/api-types";
 import { 
   getSolPriceUsd, 
-  calculateMarketCapUsd, 
   calculateGraduationProgress 
 } from "@/lib/price-cache";
 import { 
