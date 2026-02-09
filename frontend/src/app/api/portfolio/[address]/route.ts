@@ -118,7 +118,7 @@ export async function GET(
       
       // Cost basis
       const costBasisSol = solBasis;
-      const costBasisUsd = (costBasisSol * solPriceUsd) / 1e9;
+      const _costBasisUsd = (costBasisSol * solPriceUsd) / 1e9;
       
       // Unrealized P&L
       const unrealizedPnlSol = positionValueSol - costBasisSol;
