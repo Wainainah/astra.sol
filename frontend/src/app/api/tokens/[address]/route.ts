@@ -16,8 +16,7 @@ import { eq, and, sql } from "drizzle-orm";
 import { 
   TokenDetailResponse, 
   TokenStatus,
-  GraduationGates,
-  Position as ApiPosition
+  GraduationGates
 } from "@/lib/api-types";
 import { 
   getSolPriceUsd, 
