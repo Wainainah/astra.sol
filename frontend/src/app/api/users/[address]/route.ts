@@ -45,10 +45,7 @@ export async function GET(_request: Request, { params }: RouteParams) {
       .where(
         and(
           eq(positions.userAddress, address),
-          or(
-            gt(positions.lockedShares, BigInt(0)),
-            gt(positions.unlockedShares, BigInt(0)),
-          ),
+          gt(positions.shares, BigInt(0)),
         ),
       );
 

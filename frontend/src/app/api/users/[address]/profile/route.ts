@@ -11,7 +11,7 @@ import { eq } from "drizzle-orm";
 import { isValidSolanaAddress } from "@/lib/solana-utils";
 
 interface RouteParams {
-  params: { address: string };
+  params: Promise<{ address: string }>;
 }
 
 interface UpdateProfileRequest {
@@ -93,7 +93,7 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: Request, { params }: RouteParams) {
   try {
-    const { address } = params;
+    const { address } = await params;
 
     // Validate Solana address
     if (!address || !isValidSolanaAddress(address)) {
