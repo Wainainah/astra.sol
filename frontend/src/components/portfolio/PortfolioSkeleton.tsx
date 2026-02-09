@@ -139,7 +139,7 @@ export function TransactionHistorySkeleton() {
 /**
  * Complete Portfolio Page Skeleton
  */
-export function PortfolioPageSkeleton() {
+export function PortfolioSkeleton() {
   return (
     <div className="space-y-6">
       {/* Page Header */}
