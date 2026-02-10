@@ -8,7 +8,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { positions, transactions } from "@/db/schema";
-import { eq, sql, min, max, countDistinct, and, gt, or } from "drizzle-orm";
+import { eq, sql, min, max, countDistinct, and, gt } from "drizzle-orm";
 import { isValidSolanaAddress } from "@/lib/solana-utils";
 import type { User } from "@/lib/api-types";
 

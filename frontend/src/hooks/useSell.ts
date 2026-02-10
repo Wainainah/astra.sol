@@ -10,7 +10,7 @@ import { useState, useCallback } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey, Transaction } from "@solana/web3.js";
 
-import { sellReturn, getSellQuote, getPositionValue } from "@/lib/curve";
+import { sellReturn, getSellQuote } from "@/lib/curve";
 import type { SellQuote, Position } from "@/lib/api-types";
 import { BN } from "@coral-xyz/anchor";
 

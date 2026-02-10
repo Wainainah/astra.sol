@@ -9,7 +9,7 @@ import { useSell } from "./useSell";
 import { useJupiterSwap } from "./useJupiterSwap";
 import { useTokenBalance } from "./useTokenBalance";
 import { useClaim } from "./useClaim";
-// import { toast } from "sonner";
+import { toast } from "sonner";
 
 export type TradingMode = "bonding-curve" | "jupiter";
 
