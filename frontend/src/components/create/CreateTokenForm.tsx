@@ -42,6 +42,9 @@ type Step = "form" | "seed";
 
 const DRAFT_STORAGE_KEY = "astra_token_draft";
 
+// Factory address for token creation (set when program is deployed)
+const FACTORY_ADDRESS = process.env.NEXT_PUBLIC_PROGRAM_ID || "";
+
 
 
 export function CreateTokenForm() {
