@@ -16,21 +16,21 @@ export function EmptyTokensState({ status = "active" }: EmptyTokensStateProps) {
         "There are no active token launches at the moment. Be the first to create one!",
       icon: Rocket,
       accentIcon: Sparkles,
-      variant: "primary" as const,
+      variant: "default" as const,
     },
     graduated: {
       title: "NO GRADUATED TOKENS",
       description: "No tokens have graduated yet. Check back soon!",
       icon: Trophy,
       accentIcon: undefined,
-      variant: "secondary" as const,
+      variant: "muted" as const,
     },
     refunding: {
       title: "NO REFUNDING TOKENS",
       description: "No tokens are in refund mode. This is good news!",
       icon: AlertTriangle,
       accentIcon: undefined,
-      variant: "warning" as const,
+      variant: "muted" as const,
     },
   };
 

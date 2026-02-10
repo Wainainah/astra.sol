@@ -7,7 +7,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AlertTriangle, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { TokenStatus } from "@/components/token/TokenCard";
+import type { TokenStatus } from "@/lib/api-types";
 
 // Lazy-load heavy chart components to reduce initial bundle size
 const BondingCurveChart = dynamic(

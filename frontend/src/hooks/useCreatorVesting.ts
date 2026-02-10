@@ -104,7 +104,7 @@ export function useCreatorVesting({
           const creatorClaimedShares = BigInt(account.creatorClaimedShares?.toString() || "0");
 
           // Skip if no seed investment
-          if (creatorSeedShares === 0n) continue;
+          if (creatorSeedShares === BigInt(0)) continue;
 
           // Calculate vesting progress
           const graduatedAt = account.graduatedAt

@@ -10,7 +10,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { TokenStatus } from "@/components/token/TokenCard";
+import type { TokenStatus, Token } from "@/lib/api-types";
 import { getTokens } from "@/data/api";
 import { useQuery } from "@tanstack/react-query";
 import { TrendingUp, AlertCircle } from "lucide-react";
@@ -121,7 +121,7 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
                 <div className="flex flex-col">
                   <span className="font-medium">{token.name}</span>
                   <span className="text-xs text-muted-foreground">
-                    ${token.ticker} • {token.lockedBasis.toFixed(2)} SOL
+                    ${token.ticker} • {token.totalSol.toFixed(2)} SOL
                   </span>
                 </div>
               </CommandItem>

@@ -86,6 +86,7 @@ export function TokenCreatedModal({
       const timer = setTimeout(fireConfetti, 100);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [open, fireConfetti]);
 
   const handleCopy = async () => {

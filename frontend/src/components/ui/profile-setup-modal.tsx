@@ -147,7 +147,7 @@ export function ProfileSetupModal() {
           </Button>
           <Button
             onClick={handleSubmit}
-            disabled={isLoading || (username && !usernameAvailable)}
+            disabled={isLoading || (!!username && !usernameAvailable)}
             className="flex-1"
           >
             {isLoading ? "Saving..." : "Complete Profile"}

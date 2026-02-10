@@ -16,6 +16,7 @@ import { BN } from "@coral-xyz/anchor";
 
 export interface UseSellOptions {
   programId?: string;
+  launchAddress?: string;
 }
 
 export interface SellResult {

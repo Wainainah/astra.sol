@@ -127,9 +127,9 @@ export function useGraduationGates(
   }, [gates]);
 
   // Individual gate status
-  const marketCapMet = gates?.marketCapUsd >= gates?.marketCapTarget || false;
-  const holdersMet = gates?.holders >= gates?.holdersTarget || false;
-  const concentrationMet = gates?.concentration <= gates?.concentrationTarget || false;
+  const marketCapMet = (gates?.marketCapUsd ?? 0) >= (gates?.marketCapTarget ?? Infinity);
+  const holdersMet = (gates?.holders ?? 0) >= (gates?.holdersTarget ?? Infinity);
+  const concentrationMet = (gates?.concentration ?? Infinity) <= (gates?.concentrationTarget ?? 0);
 
   // Progress percentages
   const marketCapProgress = useMemo(() => {

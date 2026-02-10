@@ -7,7 +7,8 @@
 import { useMemo } from "react";
 
 interface UseAnchorProgramResult {
-  program: null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  program: any;
   isLoading: boolean;
   error: Error | null;
 }

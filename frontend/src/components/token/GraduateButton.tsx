@@ -78,6 +78,7 @@ export function GraduateButton({
       const interval = setInterval(updateCountdown, 60000);
       return () => clearInterval(interval);
     }
+    return undefined;
   }, [inExclusivityPeriod, isCreator, creatorExclusivityEndsAt]);
 
   const handleGraduate = async () => {

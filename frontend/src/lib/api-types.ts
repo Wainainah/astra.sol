@@ -314,6 +314,24 @@ export interface CommentsResponse {
 }
 
 // ============================================================================
+// V7: TOKEN PRICE TYPE
+// ============================================================================
+
+export interface TokenPrice {
+  address: string;
+  sharePrice: number;
+  sharePriceUsd: number;
+  marketCapUsd: number;
+  graduationTarget: number;
+  graduationProgress: number;
+  holders: number;
+  topHolderPercent: number;
+  totalShares: number;
+  totalSol: number;
+  status: TokenStatus;
+}
+
+// ============================================================================
 // QUERY PARAMETERS
 // ============================================================================
 

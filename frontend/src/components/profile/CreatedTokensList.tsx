@@ -99,7 +99,7 @@ export function CreatedTokensList({ creatorAddress }: CreatedTokensListProps) {
   return (
     <div className="space-y-4">
       {tokens.map((token) => {
-        const progress = calculateProgress(token.lockedBasis, solPrice);
+        const progress = calculateProgress(token.marketCapUsd);
 
         return (
           <Link key={token.address} href={`/token/${token.address}`}>
@@ -156,7 +156,7 @@ export function CreatedTokensList({ creatorAddress }: CreatedTokensListProps) {
                       aria-label={`Graduation progress: ${progress.toFixed(0)} percent`}
                     />
                     <span className="text-xs text-muted-foreground mt-1 block font-mono">
-                      {token.lockedBasis.toFixed(2)} / {targetSol.toFixed(0)}{" "}
+                      {token.totalSol.toFixed(2)} / {targetSol.toFixed(0)}{" "}
                       SOL
                       <span className="text-xs ml-1">
                         ({progress.toFixed(0)}%)

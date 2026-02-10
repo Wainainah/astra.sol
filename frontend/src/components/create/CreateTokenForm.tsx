@@ -414,7 +414,7 @@ export function CreateTokenForm() {
                   <ImageUpload
                     value={field.value ?? null}
                     onChange={field.onChange}
-                    error={form.formState.errors.image?.message}
+                    error={form.formState.errors.image?.message as string | undefined}
                   />
                 </FormControl>
                 <FormDescription>

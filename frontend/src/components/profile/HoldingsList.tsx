@@ -148,12 +148,12 @@ interface HoldingCardProps {
 
 function HoldingCard({ position, token, solPrice }: HoldingCardProps) {
   // Calculate progress using USD-based target
-  const progress = token ? calculateProgress(token.lockedBasis, solPrice) : 0;
+  const progress = token ? calculateProgress(token.marketCapUsd) : 0;
 
   // V7: Simplified - only show total shares and total basis
   // No locked/unlocked breakdown since all non-seed shares unlock at graduation
-  const totalShares = position.totalShares ?? (position.lockedShares + position.unlockedShares);
-  const totalBasis = position.totalBasis ?? (position.lockedBasis + position.unlockedBasis);
+  const totalShares = position.shares;
+  const totalBasis = position.solBasis;
 
   if (position.hasClaimedRefund) {
     return (

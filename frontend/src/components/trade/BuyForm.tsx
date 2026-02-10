@@ -50,7 +50,7 @@ export function BuyForm({ token, userShares = 0, onSuccess }: BuyFormProps) {
 
   const handleBuy = async () => {
     if (solValue <= 0) return;
-    await buy(solAmount);
+    await buy(token.address, solValue);
     setSolAmount("");
     onSuccess?.();
   };

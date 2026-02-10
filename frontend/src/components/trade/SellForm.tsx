@@ -67,7 +67,7 @@ export function SellForm({ token, position, onSuccess }: SellFormProps) {
 
   const handleSell = async () => {
     if (sharesValue <= 0 || sharesValue > userShares) return;
-    await sell(Math.floor(sharesValue).toString());
+    await sell(token.address, Math.floor(sharesValue), position!);
     setSharesToSell("");
     onSuccess?.();
   };

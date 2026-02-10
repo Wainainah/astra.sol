@@ -45,6 +45,43 @@ export const MAX_BUY_LAMPORTS = 1_000_000_000_000; // 1000 SOL
 export const MAX_BUY_USD = 200_000;
 
 // Address utilities
+// Seed Configuration (USD-based)
+export const RECOMMENDED_SEED_MIN_USD = 10;
+export const RECOMMENDED_SEED_MAX_USD = 500;
+export const DEFAULT_SOL_PRICE_USD = 200;
+export const TOP1_MAX_BPS = 1000; // 10%
+
+// Factory address
+export const FACTORY_ADDRESS = process.env.NEXT_PUBLIC_PROGRAM_ID || "";
+
+// Formatting utilities
+export function formatUSD(amount: number): string {
+  return `$${amount.toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  })}`;
+}
+
+export function usdToSol(usd: number, solPrice: number): number {
+  if (solPrice <= 0) return 0;
+  return usd / solPrice;
+}
+
+export function calculateMaxSeedSol(solPrice: number): number {
+  const maxFromUsd = MAX_SEED_USD / solPrice;
+  return Math.min(maxFromUsd, 100); // Cap at 100 SOL
+}
+
+export function calculateProgress(marketCapUsd: number): number {
+  return Math.min(100, (marketCapUsd / GRADUATION_MARKET_CAP_USD) * 100);
+}
+
+export function calculateTargetSol(solPrice: number): number {
+  if (solPrice <= 0) return 0;
+  return GRADUATION_MARKET_CAP_USD / solPrice;
+}
+
+// Address utilities
 export function shortenAddress(address: string, chars = 4): string {
   if (!address) return "";
   if (address.length <= chars * 2 + 3) return address;

@@ -26,12 +26,9 @@ export function useUnifiedTrade({
 }: UseUnifiedTradeProps) {
   // 1. Balances (Unified)
   const {
-    unclaimedShares,
-    refresh: refreshBalance,
-  } = useTokenBalance({
-    tokenMint,
-    launchAddress,
-  });
+    balance: unclaimedShares,
+    refetch: refreshBalance,
+  } = useTokenBalance(tokenMint, launchAddress);
 
   // 2. Bonding curve hooks (pre-graduation)
   const bondingBuy = useBuy({ launchAddress });
@@ -71,7 +68,8 @@ export function useUnifiedTrade({
         }
         return jupiter.sell(amount);
       }
-      return bondingSell.sell(amount);
+      // Passthrough to bonding curve sell - caller handles full args
+      return (bondingSell.sell as any)(amount);
     },
     // Using specific methods rather than whole objects for better dependency tracking
     // eslint-disable-next-line react-hooks/exhaustive-deps

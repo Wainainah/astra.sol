@@ -46,12 +46,12 @@ export function BondingCurveChart({ tokenAddress }: BondingCurveChartProps) {
   // Generate mock chart data based on market cap
   const generateMockData = useCallback((): PricePoint[] => {
     const data: PricePoint[] = [];
-    const now = Math.floor(Date.now() / 1000) as Time;
+    const now = Math.floor(Date.now() / 1000);
     const points = 100;
-    
+
     // Generate realistic market cap progression
     let marketCap = 500 + Math.random() * 1000; // Start between $500-$1500
-    
+
     for (let i = points; i >= 0; i--) {
       const time = (now - i * 3600) as Time; // Hourly data
       
@@ -161,9 +161,6 @@ export function BondingCurveChart({ tokenAddress }: BondingCurveChartProps) {
         // V7: Right price scale shows Market Cap in USD
         rightPriceScale: {
           borderColor: "rgba(255, 255, 255, 0.1)",
-          tickMarkFormatter: (price: number) => {
-            return `$${(price / 1000).toFixed(1)}k`;
-          },
         },
         crosshair: {
           horzLine: {

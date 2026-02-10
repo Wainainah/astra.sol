@@ -117,14 +117,14 @@ export const launches = astraSol.table(
     lastProcessedSlot: bigint("last_processed_slot", { mode: "bigint" }),
     updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
   },
-  (table) => [
-    index("launches_creator_idx").on(table.creator),
-    index("launches_graduated_idx").on(table.graduated),
-    index("launches_refund_mode_idx").on(table.refundMode),
-    index("launches_refund_status_idx").on(table.refundStatus),
-    index("launches_created_at_idx").on(table.createdAt),
-    index("launches_market_cap_idx").on(table.marketCapUsd),
-  ],
+  (table) => ({
+    creatorIdx: index("launches_creator_idx").on(table.creator),
+    graduatedIdx: index("launches_graduated_idx").on(table.graduated),
+    refundModeIdx: index("launches_refund_mode_idx").on(table.refundMode),
+    refundStatusIdx: index("launches_refund_status_idx").on(table.refundStatus),
+    createdAtIdx: index("launches_created_at_idx").on(table.createdAt),
+    marketCapIdx: index("launches_market_cap_idx").on(table.marketCapUsd),
+  }),
 );
 
 // ============ POSITIONS ============
@@ -168,12 +168,12 @@ export const positions = astraSol.table(
     firstBuyAt: timestamp("first_buy_at", { withTimezone: true }),
     lastUpdatedAt: timestamp("last_updated_at", { withTimezone: true }),
   },
-  (table) => [
-    primaryKey({ columns: [table.launchAddress, table.userAddress] }),
-    index("positions_launch_idx").on(table.launchAddress),
-    index("positions_user_idx").on(table.userAddress),
-    index("positions_refunded_at_idx").on(table.refundedAt),
-  ],
+  (table) => ({
+    pk: primaryKey({ columns: [table.launchAddress, table.userAddress] }),
+    launchIdx: index("positions_launch_idx").on(table.launchAddress),
+    userIdx: index("positions_user_idx").on(table.userAddress),
+    refundedAtIdx: index("positions_refunded_at_idx").on(table.refundedAt),
+  }),
 );
 
 // ============ TRANSACTIONS ============
@@ -203,12 +203,12 @@ export const transactions = astraSol.table(
     // Indexer metadata
     processedAt: timestamp("processed_at", { withTimezone: true }).defaultNow(),
   },
-  (table) => [
-    index("transactions_launch_idx").on(table.launchAddress),
-    index("transactions_user_idx").on(table.userAddress),
-    index("transactions_type_idx").on(table.type),
-    index("transactions_block_time_idx").on(table.blockTime),
-  ],
+  (table) => ({
+    launchIdx: index("transactions_launch_idx").on(table.launchAddress),
+    userIdx: index("transactions_user_idx").on(table.userAddress),
+    typeIdx: index("transactions_type_idx").on(table.type),
+    blockTimeIdx: index("transactions_block_time_idx").on(table.blockTime),
+  }),
 );
 
 // ============ WEBHOOK EVENTS ============
@@ -236,7 +236,9 @@ export const users = astraSol.table(
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
   },
-  (table) => [index("users_username_idx").on(table.username)],
+  (table) => ({
+    usernameIdx: index("users_username_idx").on(table.username),
+  }),
 );
 
 // ============ TYPE EXPORTS ============

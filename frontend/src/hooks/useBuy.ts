@@ -14,6 +14,7 @@ import type { CurveQuote } from "@/lib/api-types";
 
 export interface UseBuyOptions {
   programId?: string;
+  launchAddress?: string;
 }
 
 export interface UseBuyResult {

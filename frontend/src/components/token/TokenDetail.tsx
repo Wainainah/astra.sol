@@ -15,7 +15,7 @@ import { PublicKey } from "@solana/web3.js";
 import type { BN } from "@coral-xyz/anchor";
 import { TradePanel } from "@/components/trade/TradePanel";
 import { parseSolanaError } from "@/lib/solana-errors";
-import type { TokenStatus } from "@/components/token/TokenCard";
+import type { TokenStatus, Token, Position } from "@/lib/api-types";
 
 import { PositionSummary } from "@/components/token/PositionSummary";
 import { HoldersList } from "@/components/token/HoldersList";
@@ -188,6 +188,26 @@ export function TokenDetail({ tokenAddress }: { tokenAddress: string }) {
       ? "refunding"
       : "active";
 
+  // Build a Token object from on-chain data for child components
+  const totalSharesNum = Number(tokenData.totalLockedShares.toString()) + Number(tokenData.totalUnlockedShares.toString());
+  const totalSolNum = (Number(tokenData.totalLockedBasis.toString()) + Number(tokenData.totalUnlockedBasis.toString())) / 1e9;
+  const tokenObj: Token = {
+    address: tokenAddress,
+    name,
+    ticker: symbol,
+    creator,
+    totalShares: totalSharesNum,
+    totalSol: totalSolNum,
+    marketCapUsd: 0,
+    graduationProgress: 0,
+    graduationTarget: 42000,
+    holders: holderCount,
+    status,
+    createdAt: createdAt?.toISOString() ?? new Date().toISOString(),
+    ageHours: createdAt ? Math.floor((Date.now() - createdAt.getTime()) / (1000 * 60 * 60)) : 0,
+    image: tokenImage ?? undefined,
+  };
+
   return (
     <div className="container mx-auto px-4 py-6">
       {/* Back button */}
@@ -298,7 +318,7 @@ export function TokenDetail({ tokenAddress }: { tokenAddress: string }) {
               <ActivityFeed tokenAddress={tokenAddress} />
             </TabsContent>
             <TabsContent value="holders" className="mt-4">
-              <HoldersList tokenAddress={tokenAddress} />
+              <HoldersList holders={[]} totalShares={totalSharesNum} />
             </TabsContent>
           </Tabs>
         </div>
@@ -306,19 +326,27 @@ export function TokenDetail({ tokenAddress }: { tokenAddress: string }) {
         {/* Right Column - Trade Info */}
         <div className="space-y-6">
           <TradePanel
-            tokenAddress={tokenAddress}
-            tokenName={name}
-            ticker={symbol}
-            status={status}
-            tokenMint={tokenData.tokenMint?.toBase58()}
+            token={tokenObj}
+            position={null}
+            onTradeSuccess={() => fetchTokenData()}
           />
 
           {/* Position Summary */}
           {publicKey && (
             <PositionSummary
-              tokenAddress={tokenAddress}
-              userAddress={publicKey.toBase58()}
-              tokenStatus={status}
+              position={{
+                launchAddress: tokenAddress,
+                userAddress: publicKey.toBase58(),
+                shares: 0,
+                solBasis: 0,
+                lockedShares: 0,
+                hasClaimedTokens: false,
+                hasClaimedRefund: false,
+                firstBuyAt: null,
+                lastUpdatedAt: null,
+              }}
+              token={tokenObj}
+              solPriceUsd={0}
             />
           )}
 
