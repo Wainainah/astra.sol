@@ -13,7 +13,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { launches } from "@/db/schema";
-import { desc, asc, eq, and, sql, count } from "drizzle-orm";
+import { desc, asc, eq, and, count } from "drizzle-orm";
 import { 
   TokenListResponse, 
   Token, 
