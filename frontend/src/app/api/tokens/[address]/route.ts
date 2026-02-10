@@ -18,10 +18,7 @@ import {
   TokenStatus,
   GraduationGates
 } from "@/lib/api-types";
-import { 
-  getSolPriceUsd, 
-  calculateGraduationProgress 
-} from "@/lib/price-cache";
+import { calculateGraduationProgress } from "@/lib/price-cache";
 import { 
   GRADUATION_MARKET_CAP_USD,
   GRADUATION_MIN_HOLDERS,
